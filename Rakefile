@@ -1,11 +1,18 @@
 require 'rake'
-require 'rspec/core/rake_task' unless production?
 
+group :test do
+  require 'rspec/core/rake_task'
+end
 
 require ::File.expand_path('../config/environment', __FILE__)
 
 # Include all of ActiveSupport's core class extensions, e.g., String#camelize
 require 'active_support/core_ext'
+
+  desc "Create an empty model in app/models, e.g., rake generate:model NAME=User"
+  task :env do
+    puts ENV.inspect
+  end
 
 namespace :generate do
   desc "Create an empty model in app/models, e.g., rake generate:model NAME=User"
@@ -124,6 +131,8 @@ task "console" do
 end
 
 desc "Run the specs"
-RSpec::Core::RakeTask.new(:spec)
+task "spec" do
+  RSpec::Core::RakeTask.new(:spec)
+end
 
 task :default  => :specs

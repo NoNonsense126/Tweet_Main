@@ -24,5 +24,5 @@ gem 'byebug'
 
 group :test do
   gem 'faker'
-  gem 'rspec'
+  gem 'rspec', require: true
 end
