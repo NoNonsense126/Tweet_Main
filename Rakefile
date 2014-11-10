@@ -1,8 +1,6 @@
 require 'rake'
 
-group :test do
-  require 'rspec/core/rake_task'
-end
+require 'rspec/core/rake_task' if :production
 
 require ::File.expand_path('../config/environment', __FILE__)
 
