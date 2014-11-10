@@ -1,0 +1,25 @@
+<div class="container">
+  <h1>Choose one of the awesome features:</h1>
+  <ul>
+    <li>
+      <form action="/tweets" id="send-tweet" method="post">
+      <input type="text" name="body">
+      <input id="button" type="submit" value="Post Tweets">
+      </form>
+      <div id="status"></div>
+  	</li>
+  </ul>
+  <div id="tweets">
+    <h2> Recent Tweets </h2>
+    <div id="wait-msg">
+        <img src="/images/ajax-loader.gif"> Updating</img>
+    </div>
+    <div>
+        <%= erb :'_partials/_tweet_container' %>
+    </div>
+
+  </div>
+
+
+</div> <!-- /container -->
+
