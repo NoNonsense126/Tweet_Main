@@ -1,7 +1,15 @@
 class TwitterUser < ActiveRecord::Base
-	def post_tweet(body)
-		client = generate_client
-		client.update(body)
+	has_many :tweets
+	has_many :post_tweets
+
+	def post_tweet(time, body)
+		tweet = PostTweet.create!(twitter_user_id: self.id, body: body)
+		TweetWorker.perform_async(tweet.id)
+	end
+
+	def post_tweet_later(time, body)
+		tweet = PostTweet.create!(twitter_user_id: self.id, body: body)
+		TweetWorker.perform_at(time.to_i.minutes, tweet.id)		
 	end
 
     """Connect to the Twitter API and pull down the latest tweets"""

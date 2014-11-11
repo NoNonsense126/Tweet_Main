@@ -1,8 +1,7 @@
 post '/tweets' do
     # Getting logged user info in database
 	@user = TwitterUser.find_by(screen_name: session[:user])
-	@user.post_tweet(params[:body])
-  erb :test
+	@job_id = @user.post_tweet(params[:body])
 end
 
 post '/:username/stale' do
@@ -17,4 +16,10 @@ post '/:username/stale' do
 	else
 		403
 	end
+end
+
+post '/tweets_later' do
+    # Getting logged user info in database
+	@user = TwitterUser.find_by(screen_name: session[:user])
+	@job_id = @user.post_tweet_later(params[:time], params[:body])
 end

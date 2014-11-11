@@ -27,6 +27,7 @@ require 'sidekiq/api'
 require 'redis'
 require 'byebug'
 
+
 # Some helper constants for path-centric logic
 APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))
 
@@ -39,9 +40,10 @@ Dir[APP_ROOT.join('app', 'helpers', '*.rb')].each { |file| require file }
 # Set up the database and models
 require APP_ROOT.join('config', 'database')
 TWITTER  = Dir[APP_ROOT.join('config','twitter_oauth.yml')][0]
-APP_KEY = {}
-APP_KEY["consumer_key"] = ENV['CONSUMER_KEY']
-APP_KEY["consumer_secret"] = ENV['CONSUMER_SECRET']
+APP_KEY = YAML.load_file(TWITTER)
+# APP_KEY = {}
+# APP_KEY["consumer_key"] = ENV['CONSUMER_KEY']
+# APP_KEY["consumer_secret"] = ENV['CONSUMER_SECRET']
 
 
 use OmniAuth::Builder do

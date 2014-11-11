@@ -70,10 +70,3 @@ get '/auth/failure' do
   params[:message]
   erb :auth_failure
 end
-
-post '/tweets' do
-    # Getting logged user info in database
-	@user = TwitterUser.find_by(screen_name: session[:user])
-	@user.post_tweet(params[:body])
-  erb :test
-end
